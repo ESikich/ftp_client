@@ -1,0 +1,15 @@
+# Build outputs
+build/
+ftp-client
+*.o
+
+# Python cache
+__pycache__/
+tools/__pycache__/
+
+# Editor state
+.vscode/
+.idea/
+
+# Local scratch files
+nOmkdir
