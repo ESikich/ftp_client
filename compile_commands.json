@@ -1,87 +1,92 @@
 [
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/main.o src/main.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/main.o src/main.c",
         "file": "src/main.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_conn.o src/ftp_conn.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_conn.o src/ftp_conn.c",
         "file": "src/ftp_conn.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_data.o src/ftp_data.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_data.o src/ftp_data.c",
         "file": "src/ftp_data.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_reply.o src/ftp_reply.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_reply.o src/ftp_reply.c",
         "file": "src/ftp_reply.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_session.o src/ftp_session.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/ftp_session.o src/ftp_session.c",
         "file": "src/ftp_session.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_greeting.o tests/test_greeting.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_greeting.o tests/test_greeting.c",
         "file": "tests/test_greeting.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_reply_parser.o tests/test_reply_parser.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_reply_parser.o tests/test_reply_parser.c",
         "file": "tests/test_reply_parser.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_session.o tests/test_session.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_session.o tests/test_session.c",
         "file": "tests/test_session.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_auth_fail.o tests/test_auth_fail.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_auth_fail.o tests/test_auth_fail.c",
         "file": "tests/test_auth_fail.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_retr.o tests/test_retr.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_retr.o tests/test_retr.c",
         "file": "tests/test_retr.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_stor.o tests/test_stor.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_stor.o tests/test_stor.c",
         "file": "tests/test_stor.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_put.o tests/test_put.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_put.o tests/test_put.c",
         "file": "tests/test_put.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_put_existing.o tests/test_put_existing.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_put_existing.o tests/test_put_existing.c",
         "file": "tests/test_put_existing.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_stor_abort.o tests/test_stor_abort.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_stor_abort.o tests/test_stor_abort.c",
         "file": "tests/test_stor_abort.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_nav.o tests/test_cli_nav.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_nav.o tests/test_cli_nav.c",
         "file": "tests/test_cli_nav.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_help.o tests/test_cli_help.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_help.o tests/test_cli_help.c",
         "file": "tests/test_cli_help.c"
     },
     {
         "directory": ".",
-        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c23 -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_shell.o tests/test_cli_shell.c",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_cli_shell.o tests/test_cli_shell.c",
         "file": "tests/test_cli_shell.c"
+    },
+    {
+        "directory": ".",
+        "command": "cc -D_GNU_SOURCE -Iinclude -Isrc -std=c2x -Wall -Wextra -Wpedantic -Werror -O2 -c -o build/test_dele.o tests/test_dele.c",
+        "file": "tests/test_dele.c"
     }
 ]

@@ -58,6 +58,7 @@ Available shell commands:
 - `nlst [PATH]`
 - `retr REMOTE [LOCAL]`
 - `stor REMOTE LOCAL`
+- `dele REMOTE`
 - `put DIR REMOTE LOCAL`
 - `quit`
 - `help`
@@ -67,7 +68,7 @@ Available shell commands:
 You can still run one command at a time from the command line:
 
 ```bash
-./build/ftp-client host [port] [user [pass [pwd|cwd path|list|nlst|retr|stor [path [local]]|put dir remote local]]]
+./build/ftp-client host [port] [user [pass [pwd|cwd path|list|nlst|retr|stor|dele [path [local]]|put dir remote local]]]
 ```
 
 Examples:

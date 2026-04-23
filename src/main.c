@@ -16,6 +16,7 @@ enum {
     CMD_NLST,
     CMD_RETR,
     CMD_STOR,
+    CMD_DELE,
     CMD_PUT
 };
 
@@ -54,6 +55,8 @@ parse_command(const char *name)
         return CMD_RETR;
     if (strcmp(name, "stor") == 0)
         return CMD_STOR;
+    if (strcmp(name, "dele") == 0)
+        return CMD_DELE;
     if (strcmp(name, "put") == 0)
         return CMD_PUT;
 
@@ -95,7 +98,7 @@ static void
 print_usage(const char *prog)
 {
     fprintf(stderr,
-        "usage: %s [host [port] [user [pass [pwd|cwd path|list|nlst|retr|stor [path [local]]|put dir remote local]]]]\n",
+        "usage: %s [host [port] [user [pass [pwd|cwd path|list|nlst|retr|stor|dele [path [local]]|put dir remote local]]]]\n",
         prog);
     fprintf(stderr,
         "       %s (no args for interactive shell)\n",
@@ -118,6 +121,7 @@ print_shell_help(void)
     printf("  nlst [PATH]\n");
     printf("  retr REMOTE [LOCAL]\n");
     printf("  stor REMOTE LOCAL\n");
+    printf("  dele REMOTE\n");
     printf("  put DIR REMOTE LOCAL\n");
     printf("  quit\n");
     printf("  help\n");
@@ -500,6 +504,23 @@ run_shell(void)
                 fprintf(stderr, "retr failed: %s\n", strerror(errno));
             continue;
         }
+        if (strcmp(args[0], "dele") == 0) {
+            ftp_reply_t reply;
+
+            if (argc < 2) {
+                fprintf(stderr, "usage: dele REMOTE\n");
+                continue;
+            }
+
+            rc = ftp_session_dele(&shell.session,
+                (slice_t){ args[1], strlen(args[1]) }, &reply, 10000);
+            if (rc < 0) {
+                fprintf(stderr, "dele failed: %s\n", strerror(errno));
+            } else {
+                print_reply(&reply);
+            }
+            continue;
+        }
         if (strcmp(args[0], "stor") == 0) {
             if (argc < 3) {
                 fprintf(stderr, "usage: stor REMOTE LOCAL\n");
@@ -688,7 +709,7 @@ main(int argc, char **argv)
 
         print_reply(&reply);
     } else if (cmd == CMD_LIST || cmd == CMD_NLST || cmd == CMD_RETR ||
-        cmd == CMD_STOR) {
+        cmd == CMD_STOR || cmd == CMD_DELE) {
         if (cmd == CMD_LIST) {
             rc = ftp_session_list(&session,
                 (slice_t){ cmd_arg, strlen(cmd_arg) }, STDOUT_FILENO,
@@ -701,6 +722,15 @@ main(int argc, char **argv)
             rc = ftp_session_retr(&session,
                 (slice_t){ cmd_arg, strlen(cmd_arg) }, STDOUT_FILENO,
                 &reply, 10000);
+        } else if (cmd == CMD_DELE) {
+            if (argc < 7) {
+                print_usage(argv[0]);
+                ftp_session_close(&session);
+                return 2;
+            }
+
+            rc = ftp_session_dele(&session,
+                (slice_t){ cmd_arg, strlen(cmd_arg) }, &reply, 10000);
         } else {
             int fd;
 
