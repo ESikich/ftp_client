@@ -5,6 +5,7 @@ CFLAGS ?= -std=c2x -Wall -Wextra -Wpedantic -Werror -O2
 CPPFLAGS ?= -D_GNU_SOURCE -Iinclude -Isrc
 LDFLAGS ?=
 LDLIBS ?=
+PYTHON ?= python3
 
 BUILD_DIR := build
 FTP_SERVER_HOST := 127.0.0.1
@@ -53,7 +54,26 @@ TEST_CLI_HELP_SRC := tests/test_cli_help.c
 TEST_CLI_SHELL_SRC := tests/test_cli_shell.c
 TEST_DELE_SRC := tests/test_dele.c
 
-.PHONY: all clean test ftp-server
+COMPILE_COMMANDS_SRCS := \
+    $(APP_SRC) \
+    $(TEST_GREET_SRC) \
+    $(TEST_REPLY_SRC) \
+    $(TEST_SESSION_SRC) \
+    $(TEST_AUTH_FAIL_SRC) \
+    $(TEST_RETR_SRC) \
+    $(TEST_STOR_SRC) \
+    $(TEST_PUT_SRC) \
+    $(TEST_PUT_EXISTING_SRC) \
+    $(TEST_STOR_ABORT_SRC) \
+    $(TEST_CLI_NAV_SRC) \
+    $(TEST_CLI_HELP_SRC) \
+    $(TEST_CLI_SHELL_SRC)
+
+COMPILE_COMMANDS_CPPFLAGS := $(CPPFLAGS)
+COMPILE_COMMANDS_CFLAGS := $(CFLAGS)
+COMPILE_COMMANDS_CC := $(CC)
+
+.PHONY: all clean test ftp-server compile-commands
 
 all: $(BIN)
 
@@ -194,3 +214,12 @@ clean:
 ftp-server:
 	python3 tools/local_ftp_server.py --host $(FTP_SERVER_HOST) \
 	    --port $(FTP_SERVER_PORT) --root $(FTP_SERVER_ROOT)
+
+compile-commands:
+	$(PYTHON) tools/gen_compile_commands.py \
+	    --cc $(COMPILE_COMMANDS_CC) \
+	    --cppflags "$(COMPILE_COMMANDS_CPPFLAGS)" \
+	    --cflags "$(COMPILE_COMMANDS_CFLAGS)" \
+	    --build-dir $(BUILD_DIR) \
+	    --out compile_commands.json \
+	    $(COMPILE_COMMANDS_SRCS)

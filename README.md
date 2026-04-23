@@ -23,6 +23,12 @@ The binary is written to:
 ./build/ftp-client
 ```
 
+To regenerate `compile_commands.json` from the Makefile settings:
+
+```bash
+make compile-commands
+```
+
 ## Test
 
 ```bash
