@@ -74,9 +74,23 @@ COMPILE_COMMANDS_CPPFLAGS := $(CPPFLAGS)
 COMPILE_COMMANDS_CFLAGS := $(CFLAGS)
 COMPILE_COMMANDS_CC := $(CC)
 
-.PHONY: all clean test ftp-server compile-commands
+.PHONY: all clean test size size-musl ftp-server compile-commands
 
 all: $(BIN)
+
+size:
+	$(MAKE) clean
+	$(MAKE) all \
+	    CFLAGS='-std=c2x -Wall -Wextra -Wpedantic -Werror -Os -flto -ffunction-sections -fdata-sections -fno-asynchronous-unwind-tables -fno-unwind-tables -fomit-frame-pointer -fno-plt' \
+	    LDFLAGS='-Wl,--gc-sections -s -flto -Wl,--build-id=none -Wl,--no-eh-frame-hdr -Wl,-z,noseparate-code'
+
+size-musl:
+	$(MAKE) clean
+	$(MAKE) all \
+	    CC=musl-gcc \
+	    CPPFLAGS='-Iinclude -Isrc -D_POSIX_C_SOURCE=200809L' \
+	    CFLAGS='-std=c17 -Wall -Wextra -Wpedantic -Werror -Os -ffunction-sections -fdata-sections -fno-asynchronous-unwind-tables -fno-unwind-tables -fomit-frame-pointer -fno-plt -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=0' \
+	    LDFLAGS='-Wl,--gc-sections -s -Wl,--build-id=none -Wl,--no-eh-frame-hdr -Wl,-z,noseparate-code'
 
 test: $(BIN) $(TEST_BIN) $(TEST_REPLY_BIN) $(TEST_SESSION_BIN) \
     $(TEST_AUTH_FAIL_BIN) $(TEST_RETR_BIN) $(TEST_STOR_BIN) \

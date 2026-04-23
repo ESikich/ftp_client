@@ -26,6 +26,18 @@ The binary is written to:
 ./build/ftp-client
 ```
 
+For a smaller release build, use:
+
+```bash
+make size
+```
+
+For the smallest binary we found on this machine, use:
+
+```bash
+make size-musl
+```
+
 To regenerate `compile_commands.json` from the Makefile settings:
 
 ```bash
