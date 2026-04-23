@@ -2,6 +2,9 @@
 
 Minimal FTP client in C23, following the RFC 959 control/data flow from the design doc.
 
+Use `./build/ftp-client` with no arguments for the interactive shell, or pass
+`host ...` arguments for one-shot batch mode.
+
 ## What it does
 
 - Connects to an FTP server over TCP
@@ -62,6 +65,22 @@ Available shell commands:
 - `put DIR REMOTE LOCAL`
 - `quit`
 - `help`
+
+### Command Reference
+
+- `open HOST [PORT]`: connect to an FTP server without leaving the shell
+- `user NAME [PASS]`: start or complete login
+- `pass PASSWORD`: send the password after a `331` reply
+- `pwd`: print the current remote working directory
+- `cwd PATH`: change the current remote working directory
+- `list [PATH]`: show a detailed directory listing
+- `nlst [PATH]`: show a plain list of names
+- `retr REMOTE [LOCAL]`: download a remote file to stdout or a local file
+- `stor REMOTE LOCAL`: upload a local file to a remote path
+- `dele REMOTE`: delete a remote file
+- `put DIR REMOTE LOCAL`: create or enter a directory, then upload a file
+- `quit`: end the session and close the connection
+- `help`: print the shell command list
 
 ### Batch mode
 
