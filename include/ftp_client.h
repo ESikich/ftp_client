@@ -149,6 +149,10 @@ ftp_session_stor(ftp_session_t *session, slice_t path, int in_fd,
     ftp_reply_t *reply, int timeout_ms);
 
 int
+ftp_session_dele(ftp_session_t *session, slice_t path, ftp_reply_t *reply,
+    int timeout_ms);
+
+int
 ftp_session_quit(ftp_session_t *session, ftp_reply_t *reply, int timeout_ms);
 
 #endif

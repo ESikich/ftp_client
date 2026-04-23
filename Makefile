@@ -1,7 +1,7 @@
 # Makefile - build the FTP client starter.
 
 CC ?= cc
-CFLAGS ?= -std=c23 -Wall -Wextra -Wpedantic -Werror -O2
+CFLAGS ?= -std=c2x -Wall -Wextra -Wpedantic -Werror -O2
 CPPFLAGS ?= -D_GNU_SOURCE -Iinclude -Isrc
 LDFLAGS ?=
 LDLIBS ?=
@@ -23,6 +23,7 @@ TEST_STOR_ABORT_BIN := $(BUILD_DIR)/test_stor_abort
 TEST_CLI_NAV_BIN := $(BUILD_DIR)/test_cli_nav
 TEST_CLI_HELP_BIN := $(BUILD_DIR)/test_cli_help
 TEST_CLI_SHELL_BIN := $(BUILD_DIR)/test_cli_shell
+TEST_DELE_BIN := $(BUILD_DIR)/test_dele
 APP_SRC := \
     src/main.c \
     src/ftp_conn.c \
@@ -50,6 +51,7 @@ TEST_STOR_ABORT_SRC := tests/test_stor_abort.c
 TEST_CLI_NAV_SRC := tests/test_cli_nav.c
 TEST_CLI_HELP_SRC := tests/test_cli_help.c
 TEST_CLI_SHELL_SRC := tests/test_cli_shell.c
+TEST_DELE_SRC := tests/test_dele.c
 
 .PHONY: all clean test ftp-server
 
@@ -58,7 +60,8 @@ all: $(BIN)
 test: $(BIN) $(TEST_BIN) $(TEST_REPLY_BIN) $(TEST_SESSION_BIN) \
     $(TEST_AUTH_FAIL_BIN) $(TEST_RETR_BIN) $(TEST_STOR_BIN) \
     $(TEST_PUT_BIN) $(TEST_PUT_EXISTING_BIN) $(TEST_STOR_ABORT_BIN) \
-    $(TEST_CLI_NAV_BIN) $(TEST_CLI_HELP_BIN) $(TEST_CLI_SHELL_BIN)
+    $(TEST_CLI_NAV_BIN) $(TEST_CLI_HELP_BIN) $(TEST_CLI_SHELL_BIN) \
+    $(TEST_DELE_BIN)
 	./$(TEST_REPLY_BIN)
 	./$(TEST_BIN)
 	./$(TEST_SESSION_BIN)
@@ -71,6 +74,7 @@ test: $(BIN) $(TEST_BIN) $(TEST_REPLY_BIN) $(TEST_SESSION_BIN) \
 	./$(TEST_CLI_NAV_BIN)
 	./$(TEST_CLI_HELP_BIN)
 	./$(TEST_CLI_SHELL_BIN)
+	./$(TEST_DELE_BIN)
 
 $(BIN): $(APP_OBJ)
 	@mkdir -p $(BUILD_DIR)
@@ -124,6 +128,10 @@ $(TEST_CLI_SHELL_BIN): $(BUILD_DIR)/test_cli_shell.o $(LIB_OBJ)
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
 
+$(TEST_DELE_BIN): $(BUILD_DIR)/test_dele.o $(LIB_OBJ)
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(LDFLAGS) -o $@ $^ $(LDLIBS)
+
 $(BUILD_DIR)/%.o: src/%.c include/ftp_client.h
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
@@ -173,6 +181,10 @@ $(BUILD_DIR)/test_cli_help.o: tests/test_cli_help.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/test_cli_shell.o: tests/test_cli_shell.c
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/test_dele.o: tests/test_dele.c include/ftp_client.h
 	@mkdir -p $(BUILD_DIR)
 	$(CC) $(CPPFLAGS) $(CFLAGS) -c -o $@ $<
 

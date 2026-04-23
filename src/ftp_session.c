@@ -542,6 +542,35 @@ ftp_session_stor(ftp_session_t *session, slice_t path, int in_fd,
 }
 
 int
+ftp_session_dele(ftp_session_t *session, slice_t path, ftp_reply_t *reply,
+    int timeout_ms)
+{
+    int rc;
+
+    rc = ftp_conn_send_command(&session->conn, "DELE", path, timeout_ms);
+    if (rc < 0)
+        return -1;
+
+    rc = ftp_conn_read_reply(&session->conn, reply, timeout_ms);
+    if (rc < 0)
+        return -1;
+
+    switch (reply_class(reply)) {
+    case 2:
+        return 0;
+    case 4:
+        errno = EAGAIN;
+        return -1;
+    case 5:
+        errno = EACCES;
+        return -1;
+    default:
+        errno = EPROTO;
+        return -1;
+    }
+}
+
+int
 ftp_session_quit(ftp_session_t *session, ftp_reply_t *reply, int timeout_ms)
 {
     int rc;
