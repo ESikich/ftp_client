@@ -7,7 +7,7 @@ Minimal FTP client in C23, following the RFC 959 control/data flow from the desi
 - Connects to an FTP server over TCP
 - Reads and parses FTP replies
 - Supports `USER` / `PASS`
-- Supports `PWD`, `CWD`, `LIST`, `NLST`, `RETR`, `STOR`, and `MKD`
+- Supports `PWD`, `CWD`, `LIST`, `NLST`, `RETR`, `STOR`, `MKD`, and `DELE`
 - Uses passive mode (`PASV`) for data transfers
 - Provides both batch mode and an interactive shell
 
@@ -29,7 +29,7 @@ The binary is written to:
 make test
 ```
 
-This runs the parser, session, transfer, CLI, and shell smoke tests.
+This runs the parser, session, transfer, DELE, CLI, and shell smoke tests.
 
 ## Usage
 
